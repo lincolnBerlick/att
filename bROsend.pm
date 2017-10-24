@@ -35,7 +35,7 @@ sub new {
 		'022D' => ['map_login', 'a4 a4 a4 V C', [qw(accountID charID sessionID tick sex)]],
 		'0802' => ['party_join_request_by_name', 'Z24', [qw(partyName)]], #f
 		'0361' => ['homunculus_command', 'v C', [qw(commandType, commandID)]], #f
-		'0888' => ['storage_password'],
+		'088A' => ['storage_password'],
 	);
 	
 	$self->{packet_list}{$_} = $packets{$_} for keys %packets;
@@ -49,7 +49,7 @@ sub new {
 	
 	while (my ($k, $v) = each %packets) { $handlers{$v->[0]} = $k}
 	$self->{packet_lut}{$_} = $handlers{$_} for keys %handlers;
-	$self->cryptKeys(1194030379, 892024107, 892024107);
+	$self->cryptKeys(261883932, 1344032796, 1344032796);
 
 	return $self;
 }
