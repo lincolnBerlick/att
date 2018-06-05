@@ -1,4 +1,3 @@
-es (64 sloc)  4.1 KB
 #############################################################################
 #  OpenKore - Network subsystem												#
 #  This module contains functions for sending messages to the server.		#
