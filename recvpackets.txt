@@ -1,35 +1,36 @@
 #Packet extractor by l3o
-#Date: Tue Jun 19 09:26:14 2018
-#Encryption Keys: 548752231, 904928424, 735005906
-0369 7 7 0	# actor_action
-083C 10 10 0	# skill_use
-0437 5 5 0	# character_move
-035F 6 6 0	# sync
-0917 5 5 0	# actor_look_at
-07E4 6 6 0	# item_take
-0362 6 6 0	# item_drop
-07EC 8 8 0	# storage_item_add
-0364 8 8 0	# storage_item_remove
-0438 10 10 0	# skill_use_location
-0366 90 90 0	# unknown/unused
-096A 6 6 0	# actor_info_request
-0368 6 6 0	# actor_name_request
-0838 12 12 0	# unknown/unused
-0835 2 2 0	# unknown/unused
-0819 -1 15 0	# unknown/unused
-0811 -1 12 0	# buy_bulk_buyer
-0360 6 6 0	# buy_bulk_request
-0817 2 2 0	# buy_bulk_closeShop
-0815 -1 89 0	# buy_bulk_openShop
-0365 18 18 0	# booking_register
-0363 8 8 0	# unknown/unused
-0281 -1 12 0	# item_list_window_selected
-0867 19 19 0	# map_login
-0802 26 26 0	# party_join_request_by_name
-0436 4 4 0	# unknown/unused
-0866 26 26 0	# friend_request
-08A2 5 5 0	# homunculus_command
-0964 36 36 0	# storage_password
+#Date: Tue Jun 26 07:52:59 2018
+#Encryption Keys: 0x6117117E, 0x3E862E86, 0x1AC62C86
+0B00 7 7 0	# actor_action
+0369 10 10 0	# skill_use
+083C 5 5 0	# character_move
+0437 6 6 0	# sync
+035F 5 5 0	# actor_look_at
+0202 6 6 0	# item_take
+07E4 6 6 0	# item_drop
+0362 8 8 0	# storage_item_add
+07EC 8 8 0	# storage_item_remove
+0364 10 10 0	# skill_use_location
+0438 90 90 0	# unknown/unused
+0366 6 6 0	# actor_info_request
+096A 6 6 0	# actor_name_request
+0368 12 12 0	# unknown/unused
+0838 2 2 0	# unknown/unused
+0835 -1 15 0	# unknown/unused
+0819 -1 12 0	# buy_bulk_buyer
+0811 6 6 0	# buy_bulk_request
+0360 2 2 0	# buy_bulk_closeShop
+0817 -1 89 0	# buy_bulk_openShop
+0815 18 18 0	# booking_register
+0365 8 8 0	# unknown/unused
+0363 -1 12 0	# item_list_window_selected
+0281 19 19 0	# map_login
+022D 26 26 0	# party_join_request_by_name
+0802 4 4 0	# unknown/unused
+0436 26 26 0	# friend_request
+023B 5 5 0	# homunculus_command
+0361 36 36 0	# storage_password
+0963 2 2 0	# sync_ex_reply
 0367 2 2 0	# sync_ex_reply
 085A 2 2 0	# sync_ex_reply
 085B 2 2 0	# sync_ex_reply
@@ -43,8 +44,8 @@
 0863 2 2 0	# sync_ex_reply
 0864 2 2 0	# sync_ex_reply
 0865 2 2 0	# sync_ex_reply
-0940 2 2 0	# sync_ex_reply
-0202 2 2 0	# sync_ex_reply
+0866 2 2 0	# sync_ex_reply
+0867 2 2 0	# sync_ex_reply
 0868 2 2 0	# sync_ex_reply
 0869 2 2 0	# sync_ex_reply
 086A 2 2 0	# sync_ex_reply
@@ -73,7 +74,7 @@
 0881 2 2 0	# sync_ex_reply
 0882 2 2 0	# sync_ex_reply
 0883 2 2 0	# sync_ex_reply
-0361 2 2 0	# sync_ex_reply
+0917 2 2 0	# sync_ex_reply
 0918 2 2 0	# sync_ex_reply
 0919 2 2 0	# sync_ex_reply
 091A 2 2 0	# sync_ex_reply
@@ -113,7 +114,7 @@
 093C 2 2 0	# sync_ex_reply
 093D 2 2 0	# sync_ex_reply
 093E 2 2 0	# sync_ex_reply
-093F 2 2 0	# sync_ex_reply
+093F 2 2 0	# sync_request_ex
 02C4 2 2 0	# sync_request_ex
 0884 2 2 0	# sync_request_ex
 0885 2 2 0	# sync_request_ex
@@ -145,7 +146,7 @@
 089F 2 2 0	# sync_request_ex
 08A0 2 2 0	# sync_request_ex
 08A1 2 2 0	# sync_request_ex
-022D 2 2 0	# sync_request_ex
+08A2 2 2 0	# sync_request_ex
 08A3 2 2 0	# sync_request_ex
 08A4 2 2 0	# sync_request_ex
 08A5 2 2 0	# sync_request_ex
@@ -190,14 +191,13 @@
 095F 2 2 0	# sync_request_ex
 0960 2 2 0	# sync_request_ex
 0961 2 2 0	# sync_request_ex
+0940 2 2 0	# sync_request_ex
 0962 2 2 0	# sync_request_ex
-0963 2 2 0	# sync_request_ex
-023B 2 2 0	# sync_request_ex
+0964 2 2 0	# sync_request_ex
 0965 2 2 0	# sync_request_ex
 0966 2 2 0	# sync_request_ex
 0967 2 2 0	# sync_request_ex
 0968 2 2 0	# sync_request_ex
-0969 2 2 0	# sync_request_ex
 0187 6 6 0
 0081 3 3 0
 01C6 4 4 0
