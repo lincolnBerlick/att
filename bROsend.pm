@@ -60,15 +60,3 @@ sub new {
 }
 
 1;
-		party_setting 07D7
-		send_equip 0998
-	);
-	
-	while (my ($k, $v) = each %packets) { $handlers{$v->[0]} = $k}
-	$self->{packet_lut}{$_} = $handlers{$_} for keys %handlers;
-	$self->cryptKeys(2034134112, 1921856994, 331967776);
-
-	return $self;
-}
-
-1;
