@@ -19,28 +19,28 @@ sub new {
 	my $self = $class->SUPER::new(@_);
 	
 	my %packets = (
-		'094A' => ['actor_action', 'a4 C', [qw(targetID type)]],
-		'0938' => ['skill_use', 'v2 a4', [qw(lv skillID targetID)]],
-		'08A2' => ['character_move','a3', [qw(coords)]],
-		'095E' => ['sync', 'V', [qw(time)]],
-		'0963' => ['actor_look_at', 'v C', [qw(head body)]],
-		'0874' => ['item_take', 'a4', [qw(ID)]],
-		'0944' => ['item_drop', 'v2', [qw(index amount)]],
-		'0889' => ['storage_item_add', 'v V', [qw(index amount)]],
-		'0891' => ['storage_item_remove', 'v V', [qw(index amount)]],
-		'08A3' => ['skill_use_location', 'v4', [qw(lv skillID x y)]],
-		'092B' => ['actor_info_request', 'a4', [qw(ID)]],
-		'0861' => ['actor_name_request', 'a4', [qw(ID)]],	
-		'0937' => ['buy_bulk_buyer', 'a4 a4 a*', [qw(buyerID buyingStoreID itemInfo)]], # Buying Store
-		'0871' => ['buy_bulk_closeShop'],
-		'094B' => ['buy_bulk_openShop', 'a4 c a*', [qw(limitZeny result itemInfo)]], # Selling Store
-		'0815' => ['booking_register', 'v8', [qw(level MapID job0 job1 job2 job3 job4 job5)]], # Booking Register
-		'0811' => ['item_list_res', 'v V2 a*', [qw(len type action itemInfo)]],
-		'0876' => ['map_login', 'a4 a4 a4 V C', [qw(accountID charID sessionID tick sex)]],
-		'087D' => ['party_join_request_by_name', 'Z24', [qw(partyName)]],
-		'088F' => ['friend_request', 'a*', [qw(username)]],
-		'08A6' => ['homunculus_command', 'v C', [qw(commandType, commandID)]],
-		'08AD' => ['storage_password'],		
+		'088D' => ['actor_action', 'a4 C', [qw(targetID type)]],
+		'0365' => ['skill_use', 'v2 a4', [qw(lv skillID targetID)]],
+		'0925' => ['character_move','a3', [qw(coords)]],
+		'086E' => ['sync', 'V', [qw(time)]],
+		'0965' => ['actor_look_at', 'v C', [qw(head body)]],
+		'0954' => ['item_take', 'a4', [qw(ID)]],
+		'086F' => ['item_drop', 'v2', [qw(index amount)]],
+		'0888' => ['storage_item_add', 'v V', [qw(index amount)]],
+		'0955' => ['storage_item_remove', 'v V', [qw(index amount)]],
+		'0930' => ['skill_use_location', 'v4', [qw(lv skillID x y)]],
+		'0959' => ['actor_info_request', 'a4', [qw(ID)]],
+		'0367' => ['actor_name_request', 'a4', [qw(ID)]],	
+		'0882' => ['buy_bulk_buyer', 'a4 a4 a*', [qw(buyerID buyingStoreID itemInfo)]], # Buying Store
+		'0281' => ['buy_bulk_closeShop'],
+		'0886' => ['buy_bulk_openShop', 'a4 c a*', [qw(limitZeny result itemInfo)]], # Selling Store
+		'092D' => ['booking_register', 'v8', [qw(level MapID job0 job1 job2 job3 job4 job5)]], # Booking Register
+		'085A' => ['item_list_res', 'v V2 a*', [qw(len type action itemInfo)]],
+		'094D' => ['map_login', 'a4 a4 a4 V C', [qw(accountID charID sessionID tick sex)]],
+		'095D' => ['party_join_request_by_name', 'Z24', [qw(partyName)]],
+		'0890' => ['friend_request', 'a*', [qw(username)]],
+		'088F' => ['homunculus_command', 'v C', [qw(commandType, commandID)]],
+		'088B' => ['storage_password'],		
 	);
 	
 	$self->{packet_list}{$_} = $packets{$_} for keys %packets;
@@ -54,7 +54,7 @@ sub new {
 	
 	while (my ($k, $v) = each %packets) { $handlers{$v->[0]} = $k}
 	$self->{packet_lut}{$_} = $handlers{$_} for keys %handlers;
-	$self->cryptKeys(171867136, 875118893, 1488591054);
+	$self->cryptKeys(1859409449, 925043704, 686505270);
 
 	return $self;
 }
