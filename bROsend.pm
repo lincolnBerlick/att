@@ -1,4 +1,4 @@
-############################################################################
+#############################################################################
 #  OpenKore - Network subsystem												#
 #  This module contains functions for sending messages to the server.		#
 #																			#
@@ -10,71 +10,53 @@
 #  See http://www.gnu.org/licenses/gpl.html for the full license.			#
 #############################################################################
 # bRO (Brazil)
-package Network::Receive::bRO;
+package Network::Send::bRO;
 use strict;
-use Log qw(warning debug);
-use base 'Network::Receive::ServerType0';
-use Globals qw(%charSvrSet $messageSender $monstersList);
-use Translation qw(TF);
+use base 'Network::Send::ServerType0';
 
-# Sync_Ex algorithm developed by Fr3DBr
 sub new {
 	my ($class) = @_;
 	my $self = $class->SUPER::new(@_);
 	
 	my %packets = (
-		'0097' => ['private_message', 'v Z24 V Z*', [qw(len privMsgUser flag privMsg)]], # -1
-		'0A36' => ['monster_hp_info_tiny', 'a4 C', [qw(ID hp)]],
-		'09CB' => ['skill_used_no_damage', 'v v x2 a4 a4 C', [qw(skillID amount targetID sourceID success)]],
-		'0AC4' => ['account_server_info', 'v a4 a4 a4 a4 a26 C x17 a*', [qw(len sessionID accountID sessionID2 lastLoginIP lastLoginTime accountSex serverInfo)]], #nova linha
+		'0369' => ['actor_action', 'a4 C', [qw(targetID type)]],
+		'083C' => ['skill_use', 'v2 a4', [qw(lv skillID targetID)]],
+		'0437' => ['character_move','a3', [qw(coords)]],
+		'035F' => ['sync', 'V', [qw(time)]],
+		'091A' => ['actor_look_at', 'v C', [qw(head body)]],
+		'096A' => ['item_take', 'a4', [qw(ID)]],
+		'091F' => ['item_drop', 'v2', [qw(index amount)]],
+		'0819' => ['storage_item_add', 'v V', [qw(index amount)]],
+		'087F' => ['storage_item_remove', 'v V', [qw(index amount)]],
+		'0940' => ['skill_use_location', 'v4', [qw(lv skillID x y)]],
+		'0362' => ['actor_info_request', 'a4', [qw(ID)]],
+		'0368' => ['actor_name_request', 'a4', [qw(ID)]],	
+		'0811' => ['buy_bulk_buyer', 'a4 a4 a*', [qw(buyerID buyingStoreID itemInfo)]], # Buying Store
+		'0817' => ['buy_bulk_closeShop'],
+		'0815' => ['buy_bulk_openShop', 'a4 c a*', [qw(limitZeny result itemInfo)]], # Selling Store
+		'088F' => ['booking_register', 'v8', [qw(level MapID job0 job1 job2 job3 job4 job5)]], # Booking Register
+		'08A5' => ['item_list_res', 'v V2 a*', [qw(len type action itemInfo)]],
+		'0955' => ['map_login', 'a4 a4 a4 V C', [qw(accountID charID sessionID tick sex)]],
+		'094F' => ['party_join_request_by_name', 'Z24', [qw(partyName)]],
+		'0898' => ['friend_request', 'a*', [qw(username)]],
+		'0968' => ['homunculus_command', 'v C', [qw(commandType, commandID)]],
+		'092D' => ['storage_password'],		
 	);
-	# Sync Ex Reply Array 
-	$self->{sync_ex_reply} = {
-	'0367', '0893',	'085A', '0879',	'085B', '0366',	'085C', '0886',	'085D', '0887',	'085E', '0888',	'085F', '0889',	'0860', '088A',	'0861', '088B',	'0862', '088C',	'0863', '088D',	'0864', '088E',	'0865', '0802',	'0866', '0890',	'0867', '0891',	'0868', '0892',	'0869', '07EC',	'086A', '0894',	'086B', '0895',	'086C', '0896',	'086D', '0897',	'086E', '0202',	'086F', '0899',	'0870', '089A',	'0871', '089B',	'0872', '089C',	'0873', '089D',	'0874', '089E',	'0875', '089F',	'0876', '08A0',	'0877', '08A1',	'0878', '08A2',	'0885', '08A3',	'087A', '08A4',	'087B', '07E4',	'087C', '08A6',	'087D', '08A7',	'087E', '08A8',	'0365', '08A9',	'0880', '08AA',	'0881', '08AB',	'0882', '08AC',	'0883', '08AD',	'0917', '0941',	'0918', '0942',	'0919', '0943',	'0361', '0944',	'091B', '0945',	'091C', '0946',	'091D', '0947',	'091E', '0948',	'0363', '0949',	'0920', '094A',	'0921', '094B',	'0922', '094C',	'0923', '094D',	'0924', '094E',	'0925', '02C4',	'0926', '0950',	'0927', '0951',	'0928', '0952',	'0929', '0953',	'092A', '0954',	'092B', '0436',	'092C', '0956',	'023B', '0957',	'092E', '0958',	'092F', '0959',	'0930', '095A',	'0931', '095B',	'0932', '095C',	'0933', '095D',	'0934', '095E',	'0935', '095F',	'0936', '0960',	'0937', '0961',	'0281', '0962',	'0939', '0963',	'093A', '0964',	'093B', '0965',	'093C', '0966',	'093D', '0967',	'093E', '022D',	'093F', '0969',
-	};
-		
-	foreach my $key (keys %{$self->{sync_ex_reply}}) { $packets{$key} = ['sync_request_ex']; }
-	foreach my $switch (keys %packets) { $self->{packet_list}{$switch} = $packets{$switch}; }
 	
-	my %handlers = qw(		
-		received_characters 099D
-		received_characters_info 082D
-		sync_received_characters 09A0
-		account_server_info 0AC4 #nova linha
+	$self->{packet_list}{$_} = $packets{$_} for keys %packets;
+	
+	my %handlers = qw(
+		master_login 02B0
+		buy_bulk_vender 0801
+		party_setting 07D7
+		send_equip 0998
 	);
-
+	
+	while (my ($k, $v) = each %packets) { $handlers{$v->[0]} = $k}
 	$self->{packet_lut}{$_} = $handlers{$_} for keys %handlers;
-	$self->{vender_items_list_item_pack} = 'V v2 C v C3 a8 a25'; #nova linha
-	
+	$self->cryptKeys(1792682478, 176374796, 1538724717);
+
 	return $self;
 }
-	
-sub sync_received_characters {
-	my ($self, $args) = @_;
-
-	$charSvrSet{sync_Count} = $args->{sync_Count} if (exists $args->{sync_Count});
-	
-	# When XKore 2 client is already connected and Kore gets disconnected, send sync_received_characters anyway.
-	# In most servers, this should happen unless the client is alive
-	# This behavior was observed in April 12th 2017, when Odin and Asgard were merged into Valhalla
-	for (1..$args->{sync_Count}) {
-		$messageSender->sendToServer($messageSender->reconstruct({switch => 'sync_received_characters'}));
-	}
-}
-
-# 0A36
-sub monster_hp_info_tiny {
-	my ($self, $args) = @_;
-	my $monster = $monstersList->getByID($args->{ID});
-	if ($monster) {
-		$monster->{hp} = $args->{hp};
-		
-		debug TF("Monster %s has about %d%% hp left
-", $monster->name, $monster->{hp} * 4), "parseMsg_damage"; # FIXME: Probably inaccurate
-	}
-}
-
-*parse_quest_update_mission_hunt = *Network::Receive::ServerType0::parse_quest_update_mission_hunt_v2;
-*reconstruct_quest_update_mission_hunt = *Network::Receive::ServerType0::reconstruct_quest_update_mission_hunt_v2;
 
 1;
