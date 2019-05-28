@@ -1,6 +1,6 @@
 #Packet extractor by l3o
-#Date: Tue May 21 08:05:58 2019
-#Encryption Keys: 705968400, 705904131, 1914185367
+#Date: Tue May 28 08:10:48 2019
+#Encryption Keys: 418740309, 576004693, 1112875605
 0B10 10 10 1
 0B11 4 4 1
 0B12 2 2 -1
@@ -17,7 +17,7 @@
 083C 10 10 0	# skill_use
 0437 5 5 0	# character_move
 035F 6 6 0	# sync
-085A 5 5 0	# actor_look_at
+0202 5 5 0	# actor_look_at
 07E4 6 6 0	# item_take
 0362 6 6 0	# item_drop
 07EC 8 8 0	# storage_item_add
@@ -36,22 +36,22 @@
 0365 18 18 0	# booking_register
 0363 8 8 0	# unknown/unused
 0281 -1 12 0	# item_list_window_selected
-0937 19 19 0	# map_login
+022D 19 19 0	# map_login
 0802 26 26 0	# party_join_request_by_name
 0436 4 4 0	# unknown/unused
-0881 26 26 0	# friend_request
-0883 5 5 0	# homunculus_command
-0884 36 36 0	# storage_password
+023B 26 26 0	# friend_request
+0361 5 5 0	# homunculus_command
+0862 36 36 0	# storage_password
 0367 2 2 0	# sync_ex_reply
-0361 2 2 0	# sync_ex_reply
+085A 2 2 0	# sync_ex_reply
 085B 2 2 0	# sync_ex_reply
 085C 2 2 0	# sync_ex_reply
 085D 2 2 0	# sync_ex_reply
 085E 2 2 0	# sync_ex_reply
 085F 2 2 0	# sync_ex_reply
 0860 2 2 0	# sync_ex_reply
+0940 2 2 0	# sync_ex_reply
 0861 2 2 0	# sync_ex_reply
-0862 2 2 0	# sync_ex_reply
 0863 2 2 0	# sync_ex_reply
 0864 2 2 0	# sync_ex_reply
 0865 2 2 0	# sync_ex_reply
@@ -82,9 +82,9 @@
 087E 2 2 0	# sync_ex_reply
 087F 2 2 0	# sync_ex_reply
 0880 2 2 0	# sync_ex_reply
-0202 2 2 0	# sync_ex_reply
+0881 2 2 0	# sync_ex_reply
 0882 2 2 0	# sync_ex_reply
-022D 2 2 0	# sync_ex_reply
+0883 2 2 0	# sync_ex_reply
 0917 2 2 0	# sync_ex_reply
 0918 2 2 0	# sync_ex_reply
 0919 2 2 0	# sync_ex_reply
@@ -116,8 +116,8 @@
 0933 2 2 0	# sync_ex_reply
 0934 2 2 0	# sync_ex_reply
 0935 2 2 0	# sync_ex_reply
-0940 2 2 0	# sync_ex_reply
 0936 2 2 0	# sync_ex_reply
+0937 2 2 0	# sync_ex_reply
 0938 2 2 0	# sync_ex_reply
 0939 2 2 0	# sync_ex_reply
 093A 2 2 0	# sync_ex_reply
@@ -127,7 +127,7 @@
 093E 2 2 0	# sync_ex_reply
 093F 2 2 0	# sync_ex_reply
 02C4 2 2 0	# sync_request_ex
-023B 2 2 0	# sync_request_ex
+0884 2 2 0	# sync_request_ex
 0885 2 2 0	# sync_request_ex
 0886 2 2 0	# sync_request_ex
 0887 2 2 0	# sync_request_ex
